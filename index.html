@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Petualangan Ular Tangga - Game Web Interaktif & Edukatif</title>
+  <meta name="description" content="Game Ular Tangga (Snakes & Ladders) interaktif, responsif, dan ceria dengan Dadu 3D di samping, Tantangan Interaktif Seru, dan 15 Kartu Hukuman.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- BRIGHT FLOATING DECORATIONS -->
+  <div class="bg-elements" aria-hidden="true">
+    <div class="floating-bubble bubble-1"></div>
+    <div class="floating-bubble bubble-2"></div>
+    <div class="floating-bubble bubble-3"></div>
+    <div class="floating-bubble bubble-4"></div>
+    <div class="floating-shape shape-star">⭐</div>
+    <div class="floating-shape shape-cloud">☁️</div>
+    <div class="floating-shape shape-dice">🎲</div>
+  </div>
+
+  <!-- TOPBAR HEADER -->
+  <header class="game-topbar">
+    <div class="brand-mini">
+      <span class="brand-icon">🐍🪜</span>
+      <span class="brand-text">Ular Tangga Ceria</span>
+    </div>
+    <div class="topbar-actions">
+      <button id="btn-toggle-bgm" class="btn-icon" title="Toggle Musik Latar (BGM)" aria-label="Toggle Musik Latar">
+        <span class="icon">🎵</span>
+        <span class="btn-text">BGM</span>
+      </button>
+      <button id="btn-toggle-sfx" class="btn-icon" title="Toggle Efek Suara (SFX)" aria-label="Toggle Efek Suara">
+        <span class="icon">🔊</span>
+        <span class="btn-text">SFX</span>
+      </button>
+      <button id="btn-open-rules" class="btn-icon" title="Panduan Aturan Main" aria-label="Panduan & Aturan Main">
+        <span class="icon">📖</span>
+        <span class="btn-text">Aturan</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- SCREEN 1: LANDING PAGE -->
+  <section id="screen-landing" class="screen active">
+    <div class="landing-container">
+      <div class="landing-hero">
+        <div class="hero-badge">🎲 Edisi Spesial Tugas Akhir Desain Web</div>
+        <h1 class="hero-title">
+          <span class="title-word word-ular">ULAR</span>
+          <span class="title-word word-tangga">TANGGA</span>
+          <span class="title-badge">CHALLENGE EDITION</span>
+        </h1>
+        <p class="hero-subtitle">
+          Rasakan keseruan bertualang menaiki tangga berkah, menghindari ular realistis, serta menaklukkan <strong>Tantangan Seru</strong> & <strong>15 Kartu Hukuman</strong> menuju kotak 100!
+        </p>
+
+        <!-- Mascot & Dice Showcase -->
+        <div class="hero-mascot-arena">
+          <div class="hero-snake-svg">
+            <svg viewBox="0 0 200 120" class="floating-hero-svg">
+              <defs>
+                <linearGradient id="heroSnakeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#10b981" />
+                  <stop offset="50%" stop-color="#059669" />
+                  <stop offset="100%" stop-color="#047857" />
+                </linearGradient>
+                <linearGradient id="heroLadderGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#f59e0b" />
+                  <stop offset="100%" stop-color="#b45309" />
+                </linearGradient>
+              </defs>
+              <line x1="30" y1="110" x2="60" y2="15" stroke="url(#heroLadderGrad)" stroke-width="7" stroke-linecap="round"/>
+              <line x1="48" y1="110" x2="78" y2="15" stroke="url(#heroLadderGrad)" stroke-width="7" stroke-linecap="round"/>
+              <line x1="36" y1="90" x2="54" y2="90" stroke="#f59e0b" stroke-width="4.5" stroke-linecap="round"/>
+              <line x1="42" y1="65" x2="60" y2="65" stroke="#f59e0b" stroke-width="4.5" stroke-linecap="round"/>
+              <line x1="48" y1="40" x2="66" y2="40" stroke="#f59e0b" stroke-width="4.5" stroke-linecap="round"/>
+              <path d="M 170,110 C 135,85 195,45 135,35 C 110,30 105,10 90,16" fill="none" stroke="url(#heroSnakeGrad)" stroke-width="15" stroke-linecap="round"/>
+              <path d="M 170,110 C 135,85 195,45 135,35 C 110,30 105,10 90,16" fill="none" stroke="#fef08a" stroke-width="4" stroke-dasharray="6 4" stroke-linecap="round"/>
+              <polygon points="90,6 102,16 92,26 78,16" fill="#047857"/>
+              <circle cx="87" cy="12" r="3" fill="#fef08a"/>
+              <ellipse cx="87" cy="12" rx="1" ry="2.2" fill="#0f172a"/>
+              <path d="M 78,16 L 68,16 M 68,16 L 62,12 M 68,16 L 62,20" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="hero-dice-showcase">
+            <div class="mini-dice dice-red"><span class="dot center"></span></div>
+            <div class="mini-dice dice-blue"><span class="dot top-left"></span><span class="dot bottom-right"></span></div>
+            <div class="mini-dice dice-yellow"><span class="dot top-left"></span><span class="dot center"></span><span class="dot bottom-right"></span></div>
+          </div>
+        </div>
+
+        <!-- Start CTA Button -->
+        <div class="landing-cta-group">
+          <button id="btn-start-game" class="btn-main-start" aria-label="Mulai Permainan">
+            <span class="btn-shine"></span>
+            <span class="btn-content">
+              <span class="btn-icon-play">▶</span>
+              <span class="btn-label">MULAI GAME</span>
+              <span class="btn-stars">✨</span>
+            </span>
+          </button>
+        </div>
+
+        <!-- Features Showcase -->
+        <div class="landing-features">
+          <div class="feature-card">
+            <div class="feature-icon">🎭</div>
+            <div class="feature-info">
+              <h3>8 Karakter Hewan</h3>
+              <p>Singa, Kelinci, Panda, Rubah, Unicorn & lainnya!</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-info">
+              <h3>15 Kotak Challenge</h3>
+              <p>Tongue Twister, Tebak Gaya, Kuis & Tantangan Seru!</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🃏</div>
+            <div class="feature-info">
+              <h3>15 Kartu Hukuman</h3>
+              <p>Hukuman kocak jika gagal menyelesaikan tantangan!</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FOOTER: TIM PENGEMBANG -->
+    <footer class="landing-footer">
+      <div class="landing-footer-container">
+        <div class="footer-dev-header">
+          <span class="footer-dev-icon">👩‍💻</span>
+          <span class="footer-dev-title">TIM PENGEMBANG</span>
+        </div>
+        <p class="footer-dev-course">
+          Proyek Akhir Desain Web UI/UX &nbsp;|&nbsp; Sistem Informasi-4C-2024
+        </p>
+        <div class="footer-members-row">
+          <span class="footer-member-item">
+            <span class="member-bullet">•</span> Rachmawati Sya'adah
+          </span>
+          <span class="footer-member-item">
+            <span class="member-bullet">•</span> Nurkholissah Anindia Mustika
+          </span>
+          <span class="footer-member-item">
+            <span class="member-bullet">•</span> Suci Febriyanti
+          </span>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- SCREEN 2: MODE & PLAYER SETUP -->
+  <section id="screen-setup" class="screen">
+    <div class="setup-container">
+      <div class="setup-card">
+        <div class="setup-header">
+          <button id="btn-back-to-landing" class="btn-back" title="Kembali ke Beranda" aria-label="Kembali ke Beranda">
+            <span class="btn-back-icon">←</span>
+            <span class="btn-back-text">Kembali</span>
+          </button>
+          <div class="setup-badge-wrapper">
+            <span class="setup-badge-tag">🎮 PENGATURAN PERMAINAN</span>
+          </div>
+          <h2 class="setup-title">Pilih Mode & Karakter</h2>
+          <p class="setup-desc">Pilih karakter unik favoritmu dan tentukan lawan bertanding</p>
+        </div>
+
+        <!-- Mode Selector -->
+        <div class="mode-tabs">
+          <button type="button" class="mode-tab active" data-mode="solo">
+            <div class="tab-emoji-wrap">
+              <span class="tab-emoji">🤖</span>
+            </div>
+            <div class="tab-info">
+              <span class="tab-title">Solo (vs Bot)</span>
+              <span class="tab-badge">1 Pemain + Bot Cerdas</span>
+            </div>
+          </button>
+          <button type="button" class="mode-tab" data-mode="multi">
+            <div class="tab-emoji-wrap">
+              <span class="tab-emoji">👥</span>
+            </div>
+            <div class="tab-info">
+              <span class="tab-title">Multiplayer</span>
+              <span class="tab-badge">2 – 8 Pemain Teman</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Player Count Selector -->
+        <div class="player-count-section">
+          <div class="section-label">
+            <span class="label-icon">🎯</span>
+            <span class="label-text">Jumlah Pemain:</span>
+          </div>
+          <div class="count-pill-bar">
+            <div class="count-buttons">
+              <button type="button" class="btn-count" data-count="2">2 Pemain</button>
+              <button type="button" class="btn-count" data-count="3">3 Pemain</button>
+              <button type="button" class="btn-count active" data-count="4">4 Pemain</button>
+              <button type="button" class="btn-count" data-count="6">6 Pemain</button>
+              <button type="button" class="btn-count" data-count="8">8 Pemain</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Character Setup Cards -->
+        <div id="player-config-list" class="player-config-grid"></div>
+
+        <!-- Launch Game Action -->
+        <div class="setup-actions">
+          <button id="btn-launch-game" class="btn-play-now" aria-label="Mulai Petualangan Ular Tangga">
+            <span class="btn-play-text">MULAI PETUALANGAN</span>
+            <span class="btn-arrow">🚀</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: GAMEPLAY ARENA (DESKTOP FULL SCREEN - NO SCROLL - NO ZOOM) -->
+  <section id="screen-gameplay" class="screen">
+    <div class="gameplay-fullscreen-container">
+
+      <!-- LEFT / MAIN: THE 10x10 BOARD (MAXIMIZED VERTICALLY) -->
+      <main class="gameplay-board-wrapper">
+        <div class="board-frame-card">
+          <div class="board-edge top-edge">
+            <span class="edge-point finish-point">🏆 FINISH (100)</span>
+            <span class="edge-title">PAPAN ULAR TANGGA 10x10</span>
+            <span class="edge-point speed-indicator" id="btn-toggle-speed" title="Ubah Kecepatan Langkah">
+              ⚡ Kecepatan: <strong id="speed-label">Normal</strong>
+            </span>
+          </div>
+
+          <!-- Board Canvas 1:1 Aspect Ratio -->
+          <div class="board-canvas-wrapper" id="board-canvas-wrapper">
+            <!-- 10x10 Grid Tiles -->
+            <div class="board-grid" id="board-grid"></div>
+
+            <!-- SVG Overlay for Realistic Snakes and 3D Ladders -->
+            <svg id="board-svg-overlay" class="board-svg-overlay" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+              <defs>
+                <filter id="elementShadow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feDropShadow dx="3" dy="5" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.32"/>
+                </filter>
+                <filter id="snakeShadow" x="-40%" y="-40%" width="180%" height="180%">
+                  <feDropShadow dx="4" dy="8" stdDeviation="5" flood-color="#090d16" flood-opacity="0.4"/>
+                </filter>
+
+                <!-- 3D Wooden & Golden Ladder Gradients -->
+                <linearGradient id="ladderWoodGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#78350f" />
+                  <stop offset="30%" stop-color="#d97706" />
+                  <stop offset="70%" stop-color="#f59e0b" />
+                  <stop offset="100%" stop-color="#92400e" />
+                </linearGradient>
+
+                <linearGradient id="ladderRungGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#fef08a" />
+                  <stop offset="50%" stop-color="#f59e0b" />
+                  <stop offset="100%" stop-color="#b45309" />
+                </linearGradient>
+
+                <!-- Realistic Snake Species Gradients -->
+                <linearGradient id="snakeViperGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#34d399" />
+                  <stop offset="40%" stop-color="#059669" />
+                  <stop offset="85%" stop-color="#064e3b" />
+                  <stop offset="100%" stop-color="#022c22" />
+                </linearGradient>
+
+                <linearGradient id="snakeCoralGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fb7185" />
+                  <stop offset="40%" stop-color="#e11d48" />
+                  <stop offset="80%" stop-color="#9f1239" />
+                  <stop offset="100%" stop-color="#4c0519" />
+                </linearGradient>
+
+                <linearGradient id="snakeAmethystGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#c084fc" />
+                  <stop offset="40%" stop-color="#9333ea" />
+                  <stop offset="80%" stop-color="#581c87" />
+                  <stop offset="100%" stop-color="#2e1065" />
+                </linearGradient>
+
+                <linearGradient id="snakeGoldenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fde047" />
+                  <stop offset="40%" stop-color="#d97706" />
+                  <stop offset="80%" stop-color="#854d0e" />
+                  <stop offset="100%" stop-color="#451a03" />
+                </linearGradient>
+              </defs>
+
+              <g id="svg-ladders-group"></g>
+              <g id="svg-snakes-group"></g>
+            </svg>
+
+            <!-- Pawns Overlay -->
+            <div id="pawns-container" class="pawns-container"></div>
+            <div id="tile-effects-layer" class="tile-effects-layer"></div>
+          </div>
+
+          <div class="board-edge bottom-edge">
+            <span class="edge-point start-point">🚩 START (1)</span>
+            <span class="edge-hint">Tekan [SPASI] atau tombol Kocok Dadu di samping</span>
+            <button id="btn-forfeit-game" class="btn-text-only" title="Keluar ke Menu Utama">Kembali ke Menu</button>
+          </div>
+        </div>
+      </main>
+
+      <!-- RIGHT: SIDEBAR CONTROL PANEL (CONTAINS 3D DICE & ACTIONS ON THE SIDE!) -->
+      <aside class="gameplay-sidebar-panel">
+        <!-- Turn Status Card -->
+        <div class="turn-card" id="turn-card">
+          <div class="turn-label">GILIRAN SAAT INI</div>
+          <div class="turn-player-profile">
+            <div class="player-avatar-circle" id="turn-avatar-badge">🦁</div>
+            <div class="turn-player-details">
+              <h3 id="turn-player-name" class="turn-name">Singa Api</h3>
+              <span id="turn-player-status" class="turn-status">Kocok dadu sekarang!</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D DICE ARENA (PLACED DIRECTLY ON THE SIDE FOR ZERO SCROLL / ZERO ZOOM) -->
+        <div class="side-dice-arena">
+          <div class="dice-stage">
+            <div class="dice-cube" id="dice-cube">
+              <!-- Face 1 -->
+              <div class="dice-face face-1"><span class="pip center"></span></div>
+              <!-- Face 2 -->
+              <div class="dice-face face-2"><span class="pip top-left"></span><span class="pip bottom-right"></span></div>
+              <!-- Face 3 -->
+              <div class="dice-face face-3"><span class="pip top-left"></span><span class="pip center"></span><span class="pip bottom-right"></span></div>
+              <!-- Face 4 -->
+              <div class="dice-face face-4"><span class="pip top-left"></span><span class="pip top-right"></span><span class="pip bottom-left"></span><span class="pip bottom-right"></span></div>
+              <!-- Face 5 -->
+              <div class="dice-face face-5"><span class="pip top-left"></span><span class="pip top-right"></span><span class="pip center"></span><span class="pip bottom-left"></span><span class="pip bottom-right"></span></div>
+              <!-- Face 6 -->
+              <div class="dice-face face-6"><span class="pip top-left"></span><span class="pip top-right"></span><span class="pip mid-left"></span><span class="pip mid-right"></span><span class="pip bottom-left"></span><span class="pip bottom-right"></span></div>
+            </div>
+            <div class="dice-shadow" id="dice-shadow"></div>
+          </div>
+
+          <div class="dice-interactive-box">
+            <div class="dice-result-pill" id="dice-result-pill">
+              <span class="result-number" id="dice-result-number">?</span>
+              <span class="result-caption" id="dice-result-text">Siap Mengocok</span>
+            </div>
+            <button id="btn-roll-dice" class="btn-roll-action" aria-label="Kocok Dadu">
+              <span class="roll-btn-content">
+                <span class="roll-icon">🎲</span>
+                <span class="roll-text">KOCOK DADU</span>
+              </span>
+            </button>
+            <span class="roll-hotkey-hint">Tekan tombol [SPASI] di keyboard</span>
+          </div>
+        </div>
+
+        <!-- Player Standings Mini List -->
+        <div class="scoreboard-card">
+          <div class="card-heading">
+            <span>Posisi Pemain</span>
+            <span class="target-tag">Target: Kotak 100</span>
+          </div>
+          <div id="players-mini-list" class="players-mini-list"></div>
+        </div>
+
+        <!-- Activity Log -->
+        <div class="gamelog-card">
+          <div class="card-heading">
+            <span>Catatan Petualangan</span>
+            <span class="log-badge" id="turn-counter">Ronde: 1</span>
+          </div>
+          <div id="game-log-stream" class="game-log-stream">
+            <div class="log-entry system">
+              <span class="log-icon">🏁</span>
+              <span class="log-text">Permainan dimulai! Kotak 6, 12, 18, 26, 33, 44, 52, 58, 65, 72, 77, 82, 88, 94, 97 adalah Kotak Tantangan!</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- MODAL: CHALLENGE (TANTANGAN KOTAK) -->
+  <div id="modal-challenge" class="modal-backdrop">
+    <div class="modal-card challenge-card">
+      <div class="challenge-badge-box">
+        <span class="challenge-category-pill" id="challenge-category-pill">⚡ TANTANGAN INTERAKTIF</span>
+      </div>
+
+      <h2 class="challenge-title" id="challenge-title">Tongue Twister!</h2>
+      <p class="challenge-desc" id="challenge-desc">
+        Ucapkan kalimat berikut 3 kali berturut-turut tanpa salah sebelum waktu habis!
+      </p>
+
+      <!-- Challenge Content Arena (Sentence / Question / Pose) -->
+      <div class="challenge-content-box" id="challenge-content-box">
+        <!-- Dynamically populated with tongue twister, trivia quiz, or pose -->
+      </div>
+
+      <!-- Interactive Countdown Timer Bar -->
+      <div class="challenge-timer-wrapper" id="challenge-timer-wrapper">
+        <div class="timer-bar-track">
+          <div class="timer-bar-fill" id="timer-bar-fill"></div>
+        </div>
+        <div class="timer-label">Sisa Waktu: <strong id="timer-seconds-text">10</strong> detik</div>
+      </div>
+
+      <!-- Action Confirmation Buttons -->
+      <div class="modal-actions challenge-actions">
+        <button id="btn-challenge-success" class="btn-primary-action success-glow">
+          <span>Berhasil! 🎉</span>
+        </button>
+        <button id="btn-challenge-fail" class="btn-danger-action">
+          <span>Gagal ❌ (Ambil Kartu Hukuman)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: KARTU HUKUMAN (15 DECK CARDS) -->
+  <div id="modal-punishment" class="modal-backdrop">
+    <div class="modal-card punishment-card">
+      <div class="punishment-badge">🃏 KARTU HUKUMAN ACAK</div>
+      
+      <!-- 3D Flipping Card Stage -->
+      <div class="card-3d-stage">
+        <div class="card-3d-inner" id="card-3d-inner">
+          <div class="card-face card-back">
+            <span class="card-back-icon">🃏</span>
+            <span class="card-back-text">KARTU HUKUMAN</span>
+          </div>
+          <div class="card-face card-front">
+            <span class="punishment-icon" id="punishment-icon">⚡</span>
+            <h3 class="punishment-name" id="punishment-name">Langkah Mundur Sesuai Dadu</h3>
+            <p class="punishment-detail" id="punishment-detail">
+              Pemain harus melempar dadu sekali lagi, tapi langkahnya mundur ke belakang sebanyak angka yang keluar!
+            </p>
+            <span class="punishment-number-tag" id="punishment-card-no">Kartu #1 dari 30</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions single">
+        <button id="btn-apply-punishment" class="btn-primary-action">
+          <span>Jalankan Hukuman & Lanjutkan 💥</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- MODAL: VICTORY & LEADERBOARD (JUARA 1, 2, 3, 4) -->
+  <div id="modal-winner" class="modal-backdrop">
+    <div class="modal-card winner-card">
+      <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+      
+      <div class="winner-trophy-box">
+        <div class="trophy-sparkle">✨</div>
+        <div class="trophy-icon">🏆</div>
+        <div class="trophy-ribbon">HOREEE! JUARA DITEMUKAN!</div>
+      </div>
+
+      <h2 class="winner-title" id="winner-banner-title">Selamat Kepada Pemenang!</h2>
+      <p class="winner-subtitle" id="winner-banner-subtitle">
+        <strong id="champion-name">Singa Api</strong> berhasil menaklukkan puncak kotak 100!
+      </p>
+
+      <!-- Leaderboard Podium -->
+      <div class="leaderboard-section">
+        <h3 class="leaderboard-heading">🏅 Papan Skor Akhir (Leaderboard)</h3>
+        <div class="podium-list" id="leaderboard-podium-list"></div>
+      </div>
+
+      <!-- Match Statistics -->
+      <div class="match-stats-row">
+        <div class="stat-box">
+          <span class="stat-val" id="stat-total-turns">0</span>
+          <span class="stat-lbl">Total Ronde</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val" id="stat-total-ladders">0</span>
+          <span class="stat-lbl">Tangga Dinaiki</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-val" id="stat-total-snakes">0</span>
+          <span class="stat-lbl">Ular Digigit</span>
+        </div>
+      </div>
+
+      <!-- Modal Actions -->
+      <div class="modal-actions">
+        <button id="btn-play-again" class="btn-primary-action">
+          <span>🔄 Main Lagi</span>
+        </button>
+        <button id="btn-return-menu" class="btn-secondary-action">
+          <span>🏠 Main Menu</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: RULES -->
+  <div id="modal-rules" class="modal-backdrop">
+    <div class="modal-card rules-card">
+      <div class="rules-header">
+        <h2 class="rules-title">📖 Panduan & Aturan Main Lengkap</h2>
+        <button id="btn-close-rules" class="btn-close-modal" aria-label="Tutup Aturan">&times;</button>
+      </div>
+      <div class="rules-body">
+        <div class="rule-item">
+          <div class="rule-icon">🎯</div>
+          <div class="rule-text">
+            <strong>Tujuan Utama:</strong> Jadilah pemain pertama yang mencapai <strong>Kotak 100</strong> secara tepat.
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">⚡</div>
+          <div class="rule-text">
+            <strong>15 Kotak Challenge Seru:</strong> Terdapat 15 kotak tantangan di papan! Jika mendarat di sini, kamu harus menyelesaikan Kuis Pengetahuan Umum, Tongue Twister, Tebak Gaya, atau Tantangan Aksi Kreatif!
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">🃏</div>
+          <div class="rule-text">
+            <strong>Deck 15 Kartu Hukuman:</strong> Jika gagal atau salah menjawab tantangan, kamu wajib menarik 1 dari 15 kartu hukuman kocak!
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">🪜</div>
+          <div class="rule-text">
+            <strong>Tangga Berkah:</strong> Mendarat di bawah tangga membuat pionmu melesat naik ke puncak tangga.
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">🐍</div>
+          <div class="rule-text">
+            <strong>Ular Licik:</strong> Mendarat di kepala ular membuat pionmu meluncur turun ke ekor ular.
+          </div>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">↩️</div>
+          <div class="rule-text">
+            <strong>Aturan Pantulan:</strong> Jika kelebihan angka langkah untuk mencapai 100, pionmu akan memantul mundur!
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions single">
+        <button id="btn-got-it" class="btn-primary-action">Saya Paham, Ayo Main!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+</body>
+</html>

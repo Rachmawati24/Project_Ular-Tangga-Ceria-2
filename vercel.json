@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "name": "ular-tangga-super-fun",
+  "cleanUrls": true,
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
